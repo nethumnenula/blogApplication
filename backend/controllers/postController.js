@@ -48,23 +48,23 @@ const updatePost = async (req, res) => {
     { ...req.body },
     { new: true },
   );
-  if(!post){
-    return res.status(404).json({ error: "No such post" })
+  if (!post) {
+    return res.status(404).json({ error: "No such post" });
   }
   res.status(200).json(post);
 };
 
 // DELETE a post
 const deletePost = async (req, res) => {
-    const { id } = req.params;
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({ error: "No such post" });
-    }
-    const post = await Post.findByIdAndDelete({id});
-    if(!post){
-        return res.status(404).json({ error: "No such post" })
-    }
-    res.status(200).json(post);
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such post" });
+  }
+  const post = await Post.findByIdAndDelete({ id });
+  if (!post) {
+    return res.status(404).json({ error: "No such post" });
+  }
+  res.status(200).json(post);
 };
 
 module.exports = {
